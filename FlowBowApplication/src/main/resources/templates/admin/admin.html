@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        .button {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            background-color: #4CAF50;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .button-danger {
+            background-color: #f44336;
+        }
+
+        .button-danger:hover {
+            background-color: #e41f1f;
+        }
+    </style>
+</head>
+<body>
+<h1>Admin Dashboard</h1>
+
+<div>
+    <!-- Buttons for Bouquets -->
+    <a href="/admin/bouquets" class="button">View Bouquets</a>
+    <a href="/admin/bouquets/new" class="button">Create New Bouquet</a>
+    <a href="/admin/bouquets/edit" class="button">Edit Bouquet</a>
+    <a href="/admin/bouquets/delete" class="button button-danger">Delete Bouquet</a>
+
+    <hr> <!-- Separator for clarity -->
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <!-- Buttons for Flowers -->
+    <a href="/admin/flowers" class="button">View Flowers</a>
+    <a href="/admin/flowers/new" class="button">Create New Flower</a>
+    <a href="/admin/flowers/edit" class="button">Edit Flower</a>
+    <a href="/admin/flowers/delete" class="button button-danger">Delete Flower</a>
+
+    <hr> <!-- Separator for clarity -->
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <!-- Buttons for Tags -->
+    <a href="/admin/tags" class="button">View Tags</a>
+    <a href="/admin/tags/new" class="button">Create New Tag</a>
+    <a href="/admin/tags/edit" class="button">Edit Tag</a>
+    <a href="/admin/tags/delete" class="button button-danger">Delete Tag</a>
+</div>
+
+</body>
+</html>

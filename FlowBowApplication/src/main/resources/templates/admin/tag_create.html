@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Create New Tag</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    .form-container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .button {
+      padding: 15px 30px;
+      margin-top: 20px;
+      font-size: 16px;
+      text-decoration: none;
+      color: white;
+      background-color: #4CAF50;
+      border-radius: 5px;
+    }
+
+    .button:hover {
+      background-color: #45a049;
+    }
+
+    .button-danger {
+      background-color: #f44336;
+    }
+
+    .button-danger:hover {
+      background-color: #e41f1f;
+    }
+  </style>
+</head>
+<body>
+<h1>Create New Tag</h1>
+
+<div class="form-container">
+  <form action="/admin/tags/new" method="post">
+    <input type="text" name="name" class="input-field" placeholder="Tag Name" required value=""/>
+    <button type="submit" class="button">Create Tag</button>
+  </form>
+</div>
+
+</body>
+</html>

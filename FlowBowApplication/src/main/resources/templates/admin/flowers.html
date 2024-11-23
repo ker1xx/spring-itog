@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowers</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<h1>Available Flowers</h1>
+
+<a href="/admin/flowers/new">Create New Flower</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Amount</th>
+        <th>Availability</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop through the flowers -->
+    <tr th:each="flower : ${flowers}">
+        <td th:text="${flower.id}"></td>
+        <td th:text="${flower.name}"></td>
+        <td th:text="${flower.price}"></td>
+        <td th:text="${flower.amount}"></td>
+        <td th:text="${flower.isAvailable ? 'Available' : 'Not Available'}"></td>
+        <td>
+            <!-- Вывод тегов -->
+            <span th:each="tag : ${flower.tags}" th:text="${tag.name} + ' '"></span>
+        </td>
+        <td>
+            <a th:href="@{/admin/flowers/{id}/edit(id=${flower.id})}">Edit</a> |
+            <a th:href="@{/admin/flowers/{id}/delete(id=${flower.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

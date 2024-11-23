@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bouquets</title>
+</head>
+<body>
+<h1>List of Bouquets</h1>
+
+<a href="/admin/bouquets/new">Create New Bouquet</a>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Amount</th>
+        <th>Available</th>
+        <th>Tags</th>
+        <th>Flowers</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="bouquet : ${bouquets}">
+        <td th:text="${bouquet.name}"></td>
+        <td th:text="${bouquet.price}"></td>
+        <td th:text="${bouquet.amount}"></td>
+        <td th:text="${bouquet.isAvailable ? 'Yes' : 'No'}"></td>
+        <td>
+            <!-- Вывод тегов -->
+            <span th:each="tag : ${bouquet.tags}" th:text="${tag.name} + '; '"></span>
+        </td>
+        <td>
+            <!-- Вывод цветов -->
+            <span th:each="flower : ${bouquet.flowers}" th:text="${flower.name} + '; '"></span>
+        </td>
+        <td>
+            <a th:href="@{/admin/bouquets/{id}/edit(id=${bouquet.id})}">Edit</a> |
+            <a th:href="@{/admin/bouquets/{id}/delete(id=${bouquet.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

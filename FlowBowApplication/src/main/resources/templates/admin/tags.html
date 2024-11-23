@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard - Tags</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        .button {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            background-color: #4CAF50;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .button-danger {
+            background-color: #f44336;
+        }
+
+        .button-danger:hover {
+            background-color: #e41f1f;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+<h1>Tags Dashboard</h1>
+
+<div>
+    <a href="/admin/tags/new" class="button">Create New Tag</a>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tag : ${tags}">
+        <td th:text="${tag.id}"></td>
+        <td th:text="${tag.name}"></td>
+        <td>
+            <a th:href="@{/admin/tags/{id}/edit(id=${tag.id})}" class="button">Edit</a>
+            <a th:href="@{/admin/tags/{id}/delete(id=${tag.id})}" class="button button-danger">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

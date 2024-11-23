@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Edit Bouquet</title>
+</head>
+<body>
+<h1>Edit Bouquet</h1>
+
+<form th:action="@{/admin/bouquets/{id}/edit(id=${bouquet.id})}" th:object="${bouquet}" method="post">
+  <!-- Существующие поля остаются -->
+  <label for="name">Bouquet Name:</label>
+  <input type="text" id="name" th:field="*{name}" required><br><br>
+
+  <label for="price">Price:</label>
+  <input type="number" id="price" th:field="*{price}" step="0.01" required><br><br>
+
+  <label for="amount">Amount:</label>
+  <input type="number" id="amount" th:field="*{amount}" required><br><br>
+
+  <label for="isAvailable">Available:</label>
+  <input type="checkbox" id="isAvailable" th:field="*{isAvailable}"><br><br>
+
+  <!-- Секция выбора тегов -->
+  <label>Tags:</label><br>
+  <div th:each="tag : ${tags}">
+    <input type="checkbox"
+           th:field="*{tags}"
+           th:value="${tag.id}"
+           th:checked="${selectedTags.contains(tag.id)}" />
+    <span th:text="${tag.name}"></span><br>
+  </div>
+  <br>
+  <br>
+  <br>
+  <label>Tags:</label><br>
+  <div th:each="flower : ${flowers}">
+    <input type="checkbox"
+           th:field="*{flowers}"
+           th:value="${flower.id}"
+           th:checked="${selectedFlowers.contains(flower.id)}" />
+    <span th:text="${flower.name}"></span><br>
+  </div>
+  <br>
+
+  <button type="submit">Save Changes</button>
+</form>
+<a href="/admin/bouquets">Back to Bouquets List</a>
+</body>
+</html>

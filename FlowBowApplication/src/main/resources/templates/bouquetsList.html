@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список букетов</title>
+    <link rel="stylesheet" th:href="@{../static/css/style.css}">
+    <link rel="stylesheet" href="/static/css/MainScreenStyle.css"/>
+</head>
+<body>
+<header>
+    <div id="logo">
+        <img src="/static/media/logo.png"/>
+    </div>
+    <div class="header_buttons">
+        <div class="header_button">
+            <a><b>Цветы</b></a>
+        </div>
+        <div class="header_button ">
+            <a href="/bouquets"><b>Букеты</b></a>
+        </div>
+        <div class="header_button " style="font-size: 94%;">
+            <a><b>Доставка</b></a>
+        </div>
+        <div class="header_button ">
+            <a><b>Отзывы</b></a>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <!-- Боковая панель фильтрации -->
+    <!-- Форма фильтрации -->
+    <div class="filter-container">
+        <form method="get" th:action="@{/bouquets}">
+            <label for="tag-filter">Фильтровать по тегу:</label>
+            <select name="tag" id="tag-filter">
+                <option value="">Все</option>
+                <option th:each="tag : ${tags}" th:value="${tag.id}" th:text="${tag.name}"
+                        th:selected="${tag.id == selectedTag}"></option>
+            </select>
+            <button type="submit">Применить</button>
+        </form>
+    </div>
+
+    <!-- Сетка карточек -->
+    <div class="bouquets-grid">
+        <div class="bouquet-card" th:each="bouquet : ${bouquets}">
+            <!-- Изображение -->
+            <img th:src="@{../static/media/bouquets/{id}.jpg(id=${bouquet.id})}"
+                 th:alt="${bouquet.name}"
+                 class="bouquet-image">
+
+            <!-- Информация -->
+            <div class="bouquet-info">
+                <h2 th:text="${bouquet.name}"></h2>
+                <p th:text="'Цена: ' + ${bouquet.price} + ' ₽'"></p>
+                <p th:text="'Количество: ' + ${bouquet.amount}"></p>
+                <p th:if="${bouquet.isAvailable}" class="available">В наличии</p>
+                <p th:unless="${bouquet.isAvailable}" class="not-available">Нет в наличии</p>
+
+                <!-- Разделитель -->
+                <div class="divider"></div>
+
+                <!-- Состав -->
+                <div class="flowers">
+                    <h4>Состав:</h4>
+                    <ul>
+                        <li th:each="flower : ${bouquet.flowers}" th:text="${flower.name}"></li>
+                    </ul>
+                </div>
+
+                <!-- Теги -->
+                <div class="divider"></div>
+                <div class="tags">
+                    <h4>Теги:</h4>
+                    <ul>
+                        <li th:each="tag : ${bouquet.tags}" th:text="${tag.name}"></li>
+                    </ul>
+                </div>
+
+                <!-- Кнопка добавления -->
+                <div th:if="${session['jwtToken'] != null}" class="add-to-cart">
+                    <form method="post" th:action="@{/cart/add}">
+                        <input type="hidden" th:name="bouquetId" th:value="${bouquet.id}">
+                        <button type="submit">Добавить в корзину</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Пагинация -->
+    <div class="pagination">
+        <a th:if="${currentPage > 1}" th:href="@{/bouquets(page=${currentPage - 1}, tag=${selectedTag})}">&laquo;
+            Предыдущая</a>
+        <span th:text="'Страница ' + ${currentPage} + ' из ' + ${totalPages}"></span>
+        <a th:if="${currentPage < totalPages}" th:href="@{/bouquets(page=${currentPage + 1}, tag=${selectedTag})}">Следующая
+            &raquo;</a>
+    </div>
+</div>
+</body>
+</html>

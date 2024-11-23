@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Flower</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<h1>Create New Flower</h1>
+
+
+<form th:action="@{/admin/flowers/new}" th:object="${flower}" method="post">
+  <!-- Существующие поля остаются -->
+  <label for="name">Bouquet Name:</label>
+  <input type="text" id="name" th:field="*{name}" required><br><br>
+
+  <label for="price">Price:</label>
+  <input type="number" id="price" th:field="*{price}" step="0.01" required><br><br>
+
+  <label for="amount">Amount:</label>
+  <input type="number" id="amount" th:field="*{amount}" required><br><br>
+
+  <label for="isAvailable">Available:</label>
+  <input type="checkbox" id="isAvailable" th:field="*{isAvailable}"><br><br>
+
+  <!-- Секция выбора тегов -->
+  <label>Tags:</label><br>
+  <div th:each="tag : ${tags}">
+    <input type="checkbox" th:field="*{tags}" th:value="${tag.id}" />
+    <span th:text="${tag.name}"></span><br>
+  </div>
+  <br>
+
+  <button type="submit">Create Bouquet</button>
+</form>
+  <a href="/admin/flowers">Cancel</a>
+</body>
+</html>
